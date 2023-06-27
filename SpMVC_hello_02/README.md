@@ -8,8 +8,14 @@
 - slf4j 1.7.36으로 변경
 
 - maven-compiler-plugin java 버전 property로 변경
+					<source>${java-version}</source>
+					<target>${java-version}</target>
+					
 - lombok 설정
+  (servlet 아래에)
 - logback 설정
+  (logging 아래에 , logging은 맨위 dependency 하나만 남기고 삭제)
+
 
 ## Dto 데이터 클래스 생성하기
 - spring framework 에서 사용하는 데이터 클래스는 모든 변수를 private 으로 선언한다
