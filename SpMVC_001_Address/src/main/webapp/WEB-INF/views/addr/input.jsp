@@ -7,6 +7,9 @@
 		<div>
 			<label>ID</label><input name="a_id" />
 		</div>
+		<div class="message a_id">
+			<label></label><span></span>
+		</div>
 		<div>
 			<label>이름</label><input name="a_name" />
 		</div>
