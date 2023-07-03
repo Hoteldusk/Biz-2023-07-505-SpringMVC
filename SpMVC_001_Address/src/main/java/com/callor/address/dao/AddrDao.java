@@ -31,6 +31,6 @@ public interface AddrDao {
 
 	public int update(AddrDto addrDto);
 
-	@Delete("DELETE * FROM tbl_address WHERE a_id = #{id}")
+	@Delete("DELETE FROM tbl_address WHERE a_id = #{id}")
 	public int delete(String id);
 }
