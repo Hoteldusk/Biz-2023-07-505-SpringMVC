@@ -51,5 +51,16 @@
 		@Delete 등이 있으면 SQL 을 만들어라 -->
 	<mybatis-spring:scan
 		base-package="com.callor.address.dao" />
+	
+	<!-- 
+		transactionManage 객체와 연계하여 Annotation 방식으로 transaction을 관리 하도록 설정하겠다
+		만약 transactionManager 의 id 가 transactionManager일 경우 transaction-manager 속성은 생략가능하다
+	 -->
+	<tx:annotation-driven transaction-manager="transactionManager"/>
+	
+	<!-- DBMS와 연계하여 Transaction 을 자동화 시킬 객체 -->	
+	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="mySQL_DS"></property>
+	</bean>
 
 </beans>

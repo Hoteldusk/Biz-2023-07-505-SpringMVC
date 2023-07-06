@@ -1,0 +1,21 @@
+@charset "UTF-8";
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+html {
+  width: 100vw;
+}
+body {
+  width: 100%;
+}
+header {
+  width: 60%;
+  margin: 0px auto;
+  background-image: linear-gradient(rgb(32, 226, 251), rgb(17, 219, 254));
+}
+section.main {
+  width: 60%;
+  margin: 10px auto;
+}
