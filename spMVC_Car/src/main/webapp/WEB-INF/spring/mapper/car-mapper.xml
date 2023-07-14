@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+ <mapper namespace="com.callor.car.dao.RecordDao">
+  	
+ 	<insert id="insert">
+ 		INSERT INTO tbl_car_trip_record
+ 		( c_divison, c_location, c_depDate, c_depTime, c_arrDate, c_arrTime, c_depDist, c_arrDist, c_cost)
+ 		VALUES
+ 		(#{c_divison}, #{c_location}, #{c_depDate}, #{c_depTime}, #{c_arrDate}, #{c_arrTime}, #{c_depDist}, #{c_arrDist}, #{c_cost})
+ 	</insert>
+ 	
+ 	<update id="update">
+ 	</update>
+ 	
+ 	<select id="selectAll">
+ 		SELECT * FROM tbl_car_trip_record
+ 	</select>
+ </mapper>
