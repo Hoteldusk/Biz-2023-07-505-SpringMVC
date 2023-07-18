@@ -15,13 +15,14 @@
 	<div>MY CAR MANAGER</div>
 	<form method="POST" action="insert">
 		<div>
-			<label>운행등록</label><input placeholder="구분" name="c_divison" /><input
-				placeholder="시작거리(Km)" name="c_depDist" /><input placeholder="장소"
-				name="c_location" />
+			<label>운행등록</label>
+			<input placeholder="구분" name="c_divison" />
+			<input placeholder="시작거리(Km)" name="c_depDist" />
+			<input placeholder="장소" name="c_location" />
 		</div>
 		<div>
-			<input placeholder="종료거리(Km)" name="arrDist" /><input
-				placeholder="소모비용" name="c_cost" />
+			<input placeholder="종료거리(Km)" name="arrDist" />
+			<input placeholder="소모비용" name="c_cost" />
 			<button>저장</button>
 		</div>
 	</form>
