@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.callor.car.persistance.CarDao">
+
+	<select id ="findTachoByCarNum">
+		select * from tbl_carmanager
+		where c_carnum = #{carnum}
+		order by c_sdate DESC, c_stime DESC
+		limit 1
+	</select>
+	<select id="selectAll">
+		select * from tbl_carmanager order by c_edate DESC, c_etime DESC
+	</select>
+	<select id="findById"></select>
+	<insert id="insert">
+		insert into tbl_carmanager (
+			c_carnum, c_qty, c_username, c_sdate, c_stime, c_skm
+		) values (
+			#{c_carnum}, #{c_qty}, #{c_username}, #{c_sdate}, #{c_stime}, #{c_skm}
+		)
+	</insert>
+	<update id="update"></update>
+	<delete id="delete"></delete>
+
+</mapper>
