@@ -10,4 +10,6 @@ public interface CarDao {
 	public CarDto findTachoByCarNum(String carnum);
 
 	public List<CarDto> selectAll();
+	
+	public void create_car_table(String dumy);
 }
