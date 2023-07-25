@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.callor.book.persistance.BooksDao">
+	<insert id="insert">
+		insert into tbl_books (
+			b_code, b_name, b_auther, b_comp, b_year, b_iprice, b_rprice
+		) values (
+			#{b_code}, #{b_name}, #{b_auther}, #{b_comp}, #{b_year}, #{b_iprice}, #{b_rprice}
+		)
+	</insert>
+	<select id="selectAll">
+		select * from tbl_books
+	</select>
+	<select id="findbyId">
+		select * from tbl_books where b_code = #{id}
+	</select>
+	<update id="update">
+		update tbl_books 
+		set b_name = #{b_name}, b_auther = #{b_auther}, b_comp = #{b_comp}, 
+		b_year = #{b_year}, b_iprice = #{b_iprice}, b_rprice = #{b_rprice}
+		where b_code = #{b_code}
+	</update>
+	<select id="findbyName">
+		select * from tbl_books where b_name = #{name} limit 1
+	</select>
+</mapper>
