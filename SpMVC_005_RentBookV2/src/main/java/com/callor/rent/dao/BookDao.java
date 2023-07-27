@@ -41,4 +41,8 @@ public interface BookDao {
 
 	@Select("SELECT COUNT(*) FROM tbl_books")
 	public int selectCount();
+
+	public int selectSearchCount(List<String> searchList);
+	
+	public List<BookDto> selectSearchPage(@Param("limit") int limitCount, @Param("offset") int offSetNum, @Param("list") List<String> searchList);	
 }

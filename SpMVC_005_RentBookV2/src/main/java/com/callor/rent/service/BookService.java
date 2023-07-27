@@ -16,6 +16,7 @@ public interface BookService {
 	public BookDto findById(String bcode);
 	public int update(BookDto bookDto);
 	public List<BookDto> findByBName(String bname);
+	public void selectPage(String page, Model model, String search);
 	
 
 }

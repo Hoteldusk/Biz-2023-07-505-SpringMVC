@@ -38,4 +38,20 @@
 			B_RPRICE	INT	NOT NULL	
 		)
  	</select>
+ 	
+ 	<select id="selectSearchCount">
+ 		SELECT COUNT(*) FROM tbl_books
+ 		WHERE
+ 		<foreach collection="list" item="S" separator="OR">
+ 			 b_name LIKE CONCAT('%', #{S}, '%') 
+ 		</foreach>
+ 	</select>
+ 	<select id="selectSearchPage">
+ 		SELECT * FROM tbl_books
+ 		WHERE
+ 		<foreach collection="list" item="S" separator="OR">
+ 			 b_name LIKE CONCAT('%', #{S}, '%') 
+ 		</foreach>
+ 			LIMIT #{limit} OFFSET #{offset}
+ 	</select>
  </mapper> 

@@ -1,5 +1,7 @@
 package com.callor.rent.service.impl;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -75,9 +77,21 @@ public class BookServiceImplV1 implements BookService{
 	public void selectPage(String page, Model model) {
 		// TODO Auto-generated method stub
 		
+		/** MySQL 안쓸경우 (OFFSET 없을경우)
+		    List<BookDto> books = bookDao.selectAll();
+			int totalCount = books.size();
+			int intPageNum = Integer.valueOf(page);
+			PageDto pageDto = PageDto.builder().pageNum(intPageNum).totalCount(totalCount).build();
 		
+			List<BookDto> pageBooks = new ArrayList<>();
+			for(int index = pageDto.getOffSetNum() ; index < pageDto.getLimitCount() + pageDto.getOffSetNum(); index++) {
+			pageBooks.add(books.get(index));
+			}
+			log.debug("Page {}", pageDto);
+			model.addAttribute("BOOKS", pagebooks);
+			model.addAttribute("PAGINATION", pageDto);
+		 */	
 		
-//		List<BookDto> books = bookDao.selectAll();
 //		PageDto pageDto = new PageDto();
 //		int offSetCount = (intPageNum - 1 ) * pageDto.getOffSetNum();
 		
@@ -88,6 +102,24 @@ public class BookServiceImplV1 implements BookService{
 
 		
 		List<BookDto> books = bookDao.selectPage(pageDto.getLimitCount(), pageDto.getOffSetNum());
+		
+		model.addAttribute("BOOKS", books);
+		model.addAttribute("PAGINATION", pageDto);	
+	}
+
+	@Override
+	public void selectPage(String page, Model model, String search) {
+		
+		String[] searchs = search.split(" ");
+		// 배열을 List로 만들기
+		List<String> searchList = Arrays.asList(searchs);
+		
+		int toalCount = bookDao.selectSearchCount(searchList);
+		int intPageNum = Integer.valueOf(page);
+		
+		PageDto pageDto = PageDto.builder().pageNum(intPageNum).totalCount(toalCount).build();
+		
+		List<BookDto> books = bookDao.selectSearchPage(pageDto.getLimitCount(), pageDto.getOffSetNum(), searchList);
 		
 		model.addAttribute("BOOKS", books);
 		model.addAttribute("PAGINATION", pageDto);	

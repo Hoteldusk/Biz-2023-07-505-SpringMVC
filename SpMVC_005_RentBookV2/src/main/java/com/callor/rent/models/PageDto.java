@@ -69,7 +69,7 @@ public class PageDto {
 		this.firstPageNum = this.getFirstPageNum();
 		this.finalPageNum = this.getFinalPageNum();
 		
-		this.lastPageNum = this.firstPageNum + this.limitCount;
+		this.lastPageNum = this.firstPageNum + this.limitCount - 1;
 		this.lastPageNum = this.lastPageNum > this.finalPageNum ? this.finalPageNum : this.lastPageNum;
 		return this.lastPageNum;
 	}
