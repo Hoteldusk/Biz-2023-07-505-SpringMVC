@@ -7,13 +7,10 @@ import com.callor.rent.models.MemberDto;
 public interface MemberService {
 	
 	public int insert(MemberDto memberDto) throws Exception;
-
+	public String getNewCode();
 	public List<MemberDto> selectAll();
-
-	public MemberDto findById(String mcode);
-
+	public MemberDto findById(String bcode);
 	public int update(MemberDto memberDto) throws Exception;
-
-	public List<MemberDto> findByName(String mname);
+	public List<MemberDto> findByMName(String mName);
 
 }

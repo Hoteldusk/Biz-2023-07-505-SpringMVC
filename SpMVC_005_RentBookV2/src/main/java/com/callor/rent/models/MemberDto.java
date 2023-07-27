@@ -9,15 +9,16 @@ import lombok.ToString;
 
 @Getter
 @Setter
-@ToString
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
+@ToString
 @Builder
 public class MemberDto {
-	private String m_code; //	varchar(6)
-	private String m_name; //	varchar(125)
-	private String m_tel; //	varchar(15)
-	private String m_addr; //	varchar(125)
 
+	private String m_code;//	varchar(6)
+	private String m_name;//	varchar(125)
+	private String m_tel;//		varchar(15)
+	private String m_addr;//	varchar(125)
 
+	
 }

@@ -9,14 +9,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
 public class HomeController {
-
+	
 	/*
-	 * localhost:8080/rent 또는 localhost:8080/rent/ 
+	 * localhost:8080/rent 또는 localhost:8080/rent/ 요청을 하는 것
 	 * views/home.jsp 파일의 내용을 보여달라 라는 의미
 	 */
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {
 		return "home";
 	}
-
+	
 }
