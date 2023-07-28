@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.callor.bus.dao.TerDriveDao">
+	
+	<insert id="insert">
+        INSERT INTO tbl_terdrive (td_Id, td_TlId, td_interval, td_wasteTime, td_fare)
+        VALUES (#{td_ID},#{td_TlID},#{td_Interval},#{td_WasteTime},#{td_Fare})
+    </insert>
+    
+    <delete id="deleteAll">
+        DELETE FROM tbl_terdrive;
+    </delete>
+    
+    <select id="selectAll">
+        SELECT * FROM tbl_terdrive
+    </select>
+    
+    <select id="getTerDriveByTl_Id">
+        SELECT * FROM tbl_terdrive WHERE td_TlId = #{terLinkId}
+    </select>
+    
+</mapper>

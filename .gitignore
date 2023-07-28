@@ -147,3 +147,5 @@ typings/
 .bak
 /.vs/
 
+### PRIVATE FILE ###
+APIKEY.java
