@@ -66,8 +66,6 @@ document.addEventListener("DOMContentLoaded", () => {
         section.remove();
       }
 
-      // drive first 요소 받아서 총배차수 문구 넣어줘야함
-
       result.forEach((drive) => {
         const schedules = drive.td_schedule;
         schedules.forEach((schedule) => {
@@ -103,6 +101,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   };
 
+  // 유효성 검사 및 애니매이션 재생
   function handleChange() {
     if (select1.value === "str_default") {
       alert("첫 번째 선택지를 먼저 선택해주세요.");
@@ -111,7 +110,7 @@ document.addEventListener("DOMContentLoaded", () => {
       return false;
     }
 
-    if (select1.value === "str0006" && select2.value === "end0001") {
+    if (select1.value !== "str_default" && select2.value !== "end_default") {
       mainviewForm.style.display = "flex";
 
       stopAni_str.style.display = "flex";
@@ -134,6 +133,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
+  // 도착시간 처리 함수
   function returnArrTime(depTime, durTime) {
     const [depHour, depMin] = depTime.split(":").map(Number);
 
