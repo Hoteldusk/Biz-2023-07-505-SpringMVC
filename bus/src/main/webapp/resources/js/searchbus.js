@@ -57,80 +57,84 @@ document.addEventListener("DOMContentLoaded", () => {
       const response = await fetch(url);
       const result = await response.json();
       // result 로 화면그리기, 출발시간 + 소요시간 = 도착시간 계산
-      const list = document?.getElementById("list");
+      const list_body = document?.getElementById("list_body");
 
-      const list_index_body =
-        document?.getElementsByClassName("list_index_body");
-      for (var i = 0; i < list_index_body.length; i++) {
-        var section = list_index_body.item(i);
-        section.remove();
+      // 내용 삭제
+      while (list_body.firstChild) {
+        list_body.removeChild(list_body.firstChild);
       }
 
       result.forEach((drive) => {
         const schedules = drive.td_schedule;
         schedules.forEach((schedule) => {
-          const divElement = document?.createElement("div");
-          divElement.classList.add("list_index_body");
+          const trElement = document?.createElement("tr");
+          trElement.classList.add("list_index_body");
 
           // 새로운 span 요소들을 생성하고 내용을 설정
-          const span1 = document.createElement("span");
-          span1.textContent = `${schedule.tes_Schedule}`;
+          const td1 = document.createElement("td");
+          td1.textContent = `${schedule.tes_Schedule}`;
 
-          const span2 = document.createElement("span");
-          span2.textContent = returnArrTime(
+          const td2 = document.createElement("td");
+          td2.textContent = returnArrTime(
             `${schedule.tes_Schedule}`,
             `${drive.td_WasteTime}`
           );
 
-          const span3 = document.createElement("span");
-          span3.textContent = `${drive.td_Fare}`;
+          const td3 = document.createElement("td");
+          td3.textContent = `${drive.td_Fare}`;
 
-          const span4 = document.createElement("span");
-          span4.textContent = "O";
+          const td4 = document.createElement("td");
+          td4.textContent = "O";
 
           // 생성한 span 요소들을 div 요소에 추가
-          divElement.appendChild(span1);
-          divElement.appendChild(span2);
-          divElement.appendChild(span3);
-          divElement.appendChild(span4);
+          trElement.appendChild(td1);
+          trElement.appendChild(td2);
+          trElement.appendChild(td3);
+          trElement.appendChild(td4);
 
           // 생성한 div 요소를 list_body 요소에 추가
-          list.appendChild(divElement);
+          list_body.appendChild(trElement);
         });
       });
     }
   };
+
+  function animationPlay() {
+    mainviewForm.style.display = "flex";
+
+    stopAni_str.style.display = "flex";
+    stopAni_end.style.display = "flex";
+    moveAni.style.display = "flex";
+
+    stopAni_str.style.animationPlayState = "running";
+    stopAni_end.style.animationPlayState = "running";
+    moveAni.style.animationPlayState = "running";
+  }
+
+  function animationStop() {
+    mainviewForm.style.display = "none";
+
+    stopAni_str.style.display = "none";
+    stopAni_end.style.display = "none";
+    moveAni.style.display = "none";
+
+    stopAni_str.style.animationPlayState = "paused";
+    stopAni_end.style.animationPlayState = "paused";
+    moveAni.style.animationPlayState = "paused";
+  }
 
   // 유효성 검사 및 애니매이션 재생
   function handleChange() {
     if (select1.value === "str_default") {
       alert("첫 번째 선택지를 먼저 선택해주세요.");
       mainviewForm.style.display = "none";
-
-      return false;
     }
-
     if (select1.value !== "str_default" && select2.value !== "end_default") {
-      mainviewForm.style.display = "flex";
-
-      stopAni_str.style.display = "flex";
-      stopAni_end.style.display = "flex";
-      moveAni.style.display = "flex";
-
-      stopAni_str.style.animationPlayState = "running";
-      stopAni_end.style.animationPlayState = "running";
-      moveAni.style.animationPlayState = "running";
+      animationPlay();
     } else {
-      mainviewForm.style.display = "none";
-
-      stopAni_str.style.display = "none";
-      stopAni_end.style.display = "none";
-      moveAni.style.display = "none";
-
-      stopAni_str.style.animationPlayState = "paused";
-      stopAni_end.style.animationPlayState = "paused";
-      moveAni.style.animationPlayState = "paused";
+      animationStop();
     }
+    return false;
   }
 
   // 도착시간 처리 함수

@@ -91,6 +91,17 @@ div.topbody {
   font-size: 20px;
 }
 
+.topbody select::-webkit-scrollbar {
+  width: 10px;
+}
+.topbody select::-webkit-scrollbar-thumb {
+  background-color: rgb(201, 255, 154);
+  border-radius: 4px;
+}
+.topbody select::-webkit-scrollbar-track {
+  border-radius: 10px;
+}
+
 div.toptail {
   flex: 1;
   display: flex;
@@ -190,6 +201,17 @@ div.toptail {
   margin: 0 auto;
 
   display: none;
+  overflow-y: auto;
+}
+.middleview::-webkit-scrollbar {
+  width: 10px;
+}
+.middleview::-webkit-scrollbar-thumb {
+  background-color: rgb(201, 255, 154);
+  border-radius: 4px;
+}
+.middleview::-webkit-scrollbar-track {
+  border-radius: 10px;
 }
 
 .top {
@@ -204,6 +226,8 @@ div.toptail {
   font-weight: bold;
   width: 100%;
   height: 100%;
+
+  padding: 40px;
 }
 
 .title_left,
@@ -217,24 +241,30 @@ div.toptail {
 
 .center {
   flex: 4;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 #list {
   height: 100%;
-  overflow: auto;
-}
-#list::-webkit-scrollbar {
-  width: 10px;
-}
-#list::-webkit-scrollbar-thumb {
-  background-color: rgb(201, 255, 154);
-  border-radius: 4px;
-}
-#list::-webkit-scrollbar-track {
-  border-radius: 10px;
+  width: 100%;
+  border-collapse: collapse;
+  text-align: center;
+  table-layout: fixed;
 }
 
-.list_index {
+#list th,
+#list td {
+  padding: 15px;
+  font-size: 40px;
+}
+
+#list td {
+  border-top: 2px solid rgb(108, 190, 241);
+}
+
+/* .list_index {
   height: 18%;
   font-size: 30px;
   border-top: 2px solid rgb(108, 190, 241);
@@ -243,10 +273,11 @@ div.toptail {
   align-items: center;
 }
 
-.list_index span {
+.list_index tr {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   flex: 1;
-  display: inline-block;
-  text-align: center;
 }
 
 .list_index_body {
@@ -270,4 +301,4 @@ div.toptail {
   justify-content: center;
   font-size: 50px;
   font-weight: 200;
-}
+} */
