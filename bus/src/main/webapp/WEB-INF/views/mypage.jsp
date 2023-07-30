@@ -33,15 +33,14 @@
 			<strong>전화번호</strong>
 			<div>${MYUSER.bu_tel}</div>
 		</div>
-		
-		
+		<div class="button">
+			<a href="${rootPath}/updateuser">정보수정</a> <a
+				href="${rootPath}/delete?id=${MYUSER.bu_id}">회원탈퇴</a>
+		</div>
+
 		<div>
-			<button type="button" class="update-btn">정보수정</button>
-			<button type="button" class="delete-btn">회원탈퇴</button>
 			<c:if test="${MYUSER.bu_id == 'test'}">
-				<c:if test="${MSG != 'OK'}"><a href="mypage/savedb" class="db-btn">DB갱신</a></c:if>
-				<c:if test="${MSG == 'OK'}"><div>DB갱신에 성공했습니다</div></c:if>
-				<c:if test="${MSG == 'NO'}"><div>DB갱신에 실패했습니다</div></c:if>
+				<button type="button" class="db-btn">DB갱신</button>
 			</c:if>
 		</div>
 

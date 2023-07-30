@@ -2,7 +2,10 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  background-color: rgb(108, 190, 241);
+}
+a {
+  font-style: inherit;
+  text-decoration: none;
 }
 html {
   width: 100vw;
@@ -11,12 +14,14 @@ html {
 body {
   width: 100%;
   height: 100%;
+  background-color: rgb(208, 233, 248);
 }
 
 .wrapper {
+  background-color: antiquewhite;
   width: 60%;
   height: 90%;
-  border: 1px solid #000103;
+  border: 1px solid #203764;
   box-shadow: 7px 7px 39px rgba(0, 104, 255, 0.25);
   border-radius: 20px;
   display: flex;

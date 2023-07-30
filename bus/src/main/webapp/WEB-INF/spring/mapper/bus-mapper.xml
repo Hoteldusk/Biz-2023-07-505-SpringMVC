@@ -6,9 +6,17 @@
 <mapper namespace="com.callor.bus.dao.BusDao">
 
 	<insert id="insert">
-		insert into tbl_bus_user(bu_id, bu_password, bu_name, bu_tel)
+		insert into tbl_bus_user(bu_id, bu_password, bu_name,
+		bu_tel)
 		values(#{bu_id}, #{bu_password}, #{bu_name}, #{bu_tel});
 	</insert>
 
-	
+	<update id="update">
+		update tbl_bus_user
+		set bu_password = #{bu_password},
+		bu_name = #{bu_name},
+		bu_tel = #{bu_tel}
+		where bu_id = #{bu_id}
+	</update>
+
 </mapper> 

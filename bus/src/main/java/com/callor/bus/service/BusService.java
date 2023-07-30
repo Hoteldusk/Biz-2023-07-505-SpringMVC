@@ -9,14 +9,14 @@ import com.callor.bus.dto.UsuallyDto;
 
 @Service
 public interface BusService {
-
+	
 	public List<UserDto> selectAll();
-
 	public UserDto findById(String id);
-
 	public int insert(UserDto dto);
 
 	public String userLogin(UserDto userDto);
-
+	
 	public List<UsuallyDto> usuallyList(String id);
+	public int update(UserDto userDto);
+	public int delete(String id);
 }

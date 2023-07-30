@@ -46,9 +46,11 @@
 			<h1>
 				<a href="${rootPath}/mypage">마이페이지</a>
 			</h1>
+			<C:if test="${LOGINOUT == 'LOGIN'}">
 			<h1>
 				<a href="${rootPath}/join">회원가입</a>
 			</h1>
+			</C:if>
 			<h1>
 				<a href="${rootPath}/userprint">유저조회</a>
 			</h1>

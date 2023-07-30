@@ -62,4 +62,17 @@ public class BusServiceImplV1 implements BusService {
 		return busDao.usuallyTerminal(id);
 	}
 
+	@Override
+	public int update(UserDto userDto) {
+		// TODO Auto-generated method stub
+		return busDao.update(userDto);
+	}
+
+	@Override
+	public int delete(String id) {
+		
+		// TODO Auto-generated method stub
+		return busDao.delete(id);
+	}
+
 }

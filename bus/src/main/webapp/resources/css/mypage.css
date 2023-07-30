@@ -5,6 +5,10 @@
   padding: 0;
   box-sizing: border-box;
 }
+a {
+  font-style: inherit;
+  text-decoration: none;
+}
 
 html {
   width: 100vw;
@@ -19,7 +23,7 @@ body {
 
 div.mypage {
   margin: 10px auto;
-  background-color: cornflowerblue;
+  background-color: antiquewhite;
   width: 70%;
   height: 70%;
   display: flex;
@@ -48,13 +52,27 @@ div.mypage strong {
   border-bottom: 1px solid #eee;
 }
 
-div.mypage div div {
-  border: 1px solid black;
+div.button {
+  width: 8%;
+  display: flex;
+  border: none;
 }
 
-a.db-btn {
-  display: inline-block;
-  padding: 10px;
-  background-color: #777;
-  text-decoration: none;
+div.button a {
+  background-color: chartreuse;
+  padding: 5px;
+  margin: 3px;
+  border-radius: 3px;
+}
+
+a:hover {
+  cursor: pointer;
+}
+
+a:active {
+  background-color: chocolate;
+}
+
+div.mypage div div {
+  border: 1px solid black;
 }

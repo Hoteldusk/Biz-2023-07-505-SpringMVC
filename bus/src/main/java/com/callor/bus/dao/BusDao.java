@@ -2,6 +2,7 @@ package com.callor.bus.dao;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Select;
 
 import com.callor.bus.dto.UserDto;
@@ -21,6 +22,11 @@ public interface BusDao {
 			+ "left join tbl_bus_user U "
 			+ "	on US.us_buid = #{id} "
 			+ "where U.bu_id = #{id}")
-	public List<UsuallyDto> usuallyTerminal(String id); 
+	public List<UsuallyDto> usuallyTerminal(String id);
+
+	public int update(UserDto userDto);
+
+	@Delete("delete from tbl_bus_user where bu_id = #{id}")
+	public int delete(String id); 
 
 }

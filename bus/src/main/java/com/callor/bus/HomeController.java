@@ -5,10 +5,12 @@ import java.util.List;
 import javax.servlet.http.HttpSession;
 
 import org.json.JSONException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.callor.bus.dto.TerDto;
@@ -19,13 +21,17 @@ import com.callor.bus.service.BusService;
 import com.callor.bus.service.LoadDB;
 import com.callor.bus.service.SaveDB;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @Controller
 public class HomeController {
 
 	private final BusService busService;
 	private final SaveDB saveDB;
 	private final LoadDB loadDB;
-	
+
+	@Autowired
 	public HomeController(BusService busService, SaveDB saveDB, LoadDB loadDB) {
 		this.busService = busService;
 		this.saveDB = saveDB;
@@ -107,7 +113,7 @@ public class HomeController {
 
 		return "searcharea";
 	}
-	
+
 	@RequestMapping(value = "/searchbus", method = RequestMethod.GET)
 	public String searchBus(Model model) {
 		List<TerDto> terlist = loadDB.loadDepTerData();
@@ -129,6 +135,33 @@ public class HomeController {
 		}
 	}
 
+	@RequestMapping(value = "/updateuser", method = RequestMethod.GET)
+	public String update(HttpSession httpSession, Model model) {
+
+		UserDto userDto = (UserDto) httpSession.getAttribute("USER");
+		userDto = busService.findById(userDto.getBu_id());
+		model.addAttribute("MYUSER", userDto);
+		return "updateuser";
+	}
+
+	@RequestMapping(value = "/updateuser", method = RequestMethod.POST)
+	public String update(UserDto userDto) {
+
+		busService.update(userDto);
+		return "redirect:/mypage";
+	}
+
+	@RequestMapping(value = "/delete", method = RequestMethod.GET)
+	public String delete(@RequestParam(name = "id") String id, HttpSession httpSession) {
+		log.debug("id정보 : {}", id);
+		busService.delete(id);
+		
+		httpSession.setAttribute("USER", null);
+		httpSession.removeAttribute("USER");
+
+		return "redirect:/";
+	}
+
 	@RequestMapping(value = "/usually", method = RequestMethod.GET)
 	public String usually(HttpSession httpSession, Model model) {
 		UserDto userDto = (UserDto) httpSession.getAttribute("USER");
@@ -139,9 +172,7 @@ public class HomeController {
 		} else {
 			return "redirect:/login";
 		}
-
 	}
-
 	@RequestMapping(value = "/mypage/savedb", method = RequestMethod.GET)
 	public String saveDB(Model model) {
 
