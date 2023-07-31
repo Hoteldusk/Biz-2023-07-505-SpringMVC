@@ -19,11 +19,11 @@ document.addEventListener("DOMContentLoaded", () => {
       const response = await fetch(url);
       const result = await response.json();
       console.log(result);
-      result.forEach((depTer) => {
+      result.forEach((arrTer) => {
         // 새로운 옵션을 생성
         const newOption = document.createElement("option");
-        newOption.value = `${depTer.terId}`; // 새로운 옵션의 값 설정
-        newOption.textContent = `${depTer.terName}`; // 새로운 옵션의 텍스트 설정
+        newOption.value = `${arrTer.terId}`; // 새로운 옵션의 값 설정
+        newOption.textContent = `${arrTer.terName}`; // 새로운 옵션의 텍스트 설정
 
         // 새로운 옵션을 select 요소에 추가
         select2.appendChild(newOption);
@@ -84,6 +84,7 @@ document.addEventListener("DOMContentLoaded", () => {
           td3.textContent = `${drive.td_Fare}`;
 
           const td4 = document.createElement("td");
+          // 비교문 실행 후 이미지 삽입
           td4.textContent = "O";
 
           // 생성한 span 요소들을 div 요소에 추가
