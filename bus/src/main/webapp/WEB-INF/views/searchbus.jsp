@@ -33,7 +33,7 @@ prefix="c"%>
                 출발지를 선택해주세요
               </option>
               <c:forEach items="${DEPTERS}" var="DEPTER">
-                <option value="${DEPTER.terId}">${DEPTER.terName}</option>
+                <option value="${DEPTER.tl_depTerId}">${DEPTER.depTerName}</option>
               </c:forEach>
             </select>
           </form>

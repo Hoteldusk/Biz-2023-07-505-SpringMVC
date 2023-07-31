@@ -22,8 +22,8 @@ document.addEventListener("DOMContentLoaded", () => {
       result.forEach((arrTer) => {
         // 새로운 옵션을 생성
         const newOption = document.createElement("option");
-        newOption.value = `${arrTer.terId}`; // 새로운 옵션의 값 설정
-        newOption.textContent = `${arrTer.terName}`; // 새로운 옵션의 텍스트 설정
+        newOption.value = `${arrTer.tl_arrTerId}`; // 새로운 옵션의 값 설정
+        newOption.textContent = `${arrTer.arrTerName}`; // 새로운 옵션의 텍스트 설정
 
         // 새로운 옵션을 select 요소에 추가
         select2.appendChild(newOption);
@@ -54,6 +54,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const arrValue = select2.value;
 
       const url = `${rootPath}/searchbus/loadSchedule?depTerId=${depValue}&arrTerId=${arrValue}`;
+      console.log(url);
       const response = await fetch(url);
       const result = await response.json();
       // result 로 화면그리기, 출발시간 + 소요시간 = 도착시간 계산
@@ -64,38 +65,37 @@ document.addEventListener("DOMContentLoaded", () => {
         list_body.removeChild(list_body.firstChild);
       }
 
+      console.log(result);
+
       result.forEach((drive) => {
-        const schedules = drive.td_schedule;
-        schedules.forEach((schedule) => {
-          const trElement = document?.createElement("tr");
-          trElement.classList.add("list_index_body");
+        const trElement = document?.createElement("tr");
+        trElement.classList.add("list_index_body");
 
-          // 새로운 span 요소들을 생성하고 내용을 설정
-          const td1 = document.createElement("td");
-          td1.textContent = `${schedule.tes_Schedule}`;
+        // 새로운 span 요소들을 생성하고 내용을 설정
+        const td1 = document.createElement("td");
+        td1.textContent = `${drive.tes_schedule}`;
 
-          const td2 = document.createElement("td");
-          td2.textContent = returnArrTime(
-            `${schedule.tes_Schedule}`,
-            `${drive.td_WasteTime}`
-          );
+        const td2 = document.createElement("td");
+        td2.textContent = returnArrTime(
+          `${drive.tes_schedule}`,
+          `${drive.td_wasteTime}`
+        );
 
-          const td3 = document.createElement("td");
-          td3.textContent = `${drive.td_Fare}`;
+        const td3 = document.createElement("td");
+        td3.textContent = `${drive.td_fare}`;
 
-          const td4 = document.createElement("td");
-          // 비교문 실행 후 이미지 삽입
-          td4.textContent = "O";
+        const td4 = document.createElement("td");
+        // 비교문 실행 후 이미지 삽입
+        td4.textContent = "O";
 
-          // 생성한 span 요소들을 div 요소에 추가
-          trElement.appendChild(td1);
-          trElement.appendChild(td2);
-          trElement.appendChild(td3);
-          trElement.appendChild(td4);
+        // 생성한 span 요소들을 div 요소에 추가
+        trElement.appendChild(td1);
+        trElement.appendChild(td2);
+        trElement.appendChild(td3);
+        trElement.appendChild(td4);
 
-          // 생성한 div 요소를 list_body 요소에 추가
-          list_body.appendChild(trElement);
-        });
+        // 생성한 div 요소를 list_body 요소에 추가
+        list_body.appendChild(trElement);
       });
     }
   };

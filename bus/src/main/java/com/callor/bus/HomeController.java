@@ -13,8 +13,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.callor.bus.dto.TerDto;
-import com.callor.bus.dto.TerScheduleVO;
+import com.callor.bus.dto.TerDriveVO;
+import com.callor.bus.dto.TerLinkVO;
 import com.callor.bus.dto.UserDto;
 import com.callor.bus.dto.UsuallyDto;
 import com.callor.bus.service.BusService;
@@ -116,7 +116,7 @@ public class HomeController {
 
 	@RequestMapping(value = "/searchbus", method = RequestMethod.GET)
 	public String searchBus(Model model) {
-		List<TerDto> terlist = loadDB.loadDepTerData();
+		List<TerLinkVO> terlist = loadDB.loadDepTerData();
 		model.addAttribute("DEPTERS", terlist);
 		return "searchbus";
 	}
@@ -191,13 +191,13 @@ public class HomeController {
 	
 	@ResponseBody
 	@RequestMapping(value = "/searchbus/loadArrTer", method = RequestMethod.GET)
-	public List<TerDto> loadArrTer(String depTerId) {
+	public List<TerLinkVO> loadArrTer(String depTerId) {
 		return loadDB.loadArrTerData(depTerId);
 	}
 	
 	@ResponseBody
 	@RequestMapping(value = "/searchbus/loadSchedule", method = RequestMethod.GET)
-	public List<TerScheduleVO> loadSchedule(String depTerId, String arrTerId) {
+	public List<TerDriveVO> loadSchedule(String depTerId, String arrTerId) {
 		return loadDB.loadTerDriveAndSchedule(depTerId, arrTerId);
 	}	
 }

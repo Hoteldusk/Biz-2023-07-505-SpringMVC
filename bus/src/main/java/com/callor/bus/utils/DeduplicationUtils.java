@@ -6,13 +6,15 @@ import java.util.List;
 import java.util.Set;
 
 import com.callor.bus.dto.TerDto;
+import com.callor.bus.dto.TerLinkVO;
 
 public class DeduplicationUtils {
-    public static List<TerDto> removeDuplicates(List<TerDto> list) {
-        Set<TerDto> set = new HashSet<>();
-        List<TerDto> deduplicatedList = new ArrayList<>();
+	
+    public static <T> List<T> removeDuplicates(List<T> list) {
+    	Set<T> set = new HashSet<>();
+        List<T> deduplicatedList = new ArrayList<>();
 
-        for (TerDto dto : list) {
+        for (T dto : list) {
             if (set.add(dto)) {
                 deduplicatedList.add(dto);
             }
@@ -20,4 +22,5 @@ public class DeduplicationUtils {
 
         return deduplicatedList;
     }
+    
 }
