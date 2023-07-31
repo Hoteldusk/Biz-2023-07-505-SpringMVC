@@ -17,6 +17,8 @@ prefix="c"%>
     <script src="${rootPath}/resources/js/searchbus.js"></script>
     <script>
       var rootPath = "${rootPath}";
+      var scode = "${USNOSUN.us_stcode}";
+      var ecode = "${USNOSUN.us_etcode}";
     </script>
     <title>노선 조회</title>
   </head>
@@ -33,11 +35,19 @@ prefix="c"%>
                 출발지를 선택해주세요
               </option>
               <c:forEach items="${DEPTERS}" var="DEPTER">
-                <option value="${DEPTER.tl_depTerId}">${DEPTER.depTerName}</option>
+                <option value="${DEPTER.tl_depTerId}">
+                  ${DEPTER.depTerName}
+                </option>
               </c:forEach>
             </select>
           </form>
-          <div>노선 조회</div>
+
+          <c:if test="${not empty sessionScope.USER}">
+            <div>즐겨 찾기 등록</div>
+          </c:if>
+          <c:if test="${empty sessionScope.USER}">
+            <div>노선 조회</div>
+          </c:if>
           <form action="#">
             <select name="end_bus" id="select2">
               <option value="end_default">도착지를 선택해주세요</option>

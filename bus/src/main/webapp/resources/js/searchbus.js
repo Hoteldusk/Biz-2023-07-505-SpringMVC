@@ -6,7 +6,125 @@ document.addEventListener("DOMContentLoaded", () => {
   const stopAni_str = document.getElementById("stop-image-str");
   const stopAni_end = document.getElementById("stop-image-end");
   const moveAni = document.getElementById("moving-image");
+  //
+  //
+  // 즐겨찾기 등록 유효성검사
+  //
 
+  //
+  //
+  // 최초페이지 실행(즐겨찾기에서 넘어올시)
+  //
+  if (scode !== "default" && ecode !== "default") {
+    const select1 = document.getElementById("select1");
+    const select2 = document.getElementById("select2");
+    // 출발 드롭다운 데이터
+    while (select1.options.length > 1) {
+      select1.removeChild(select1.lastChild);
+    }
+
+    let url = `${rootPath}/searchbus/loadDepTer`;
+    const loadDep = async () => {
+      const response = await fetch(url);
+      const result = await response.json();
+      console.log(result);
+      result.forEach((depTer) => {
+        // 새로운 옵션을 생성
+        const newOption = document.createElement("option");
+        newOption.value = `${depTer.tl_depTerId}`; // 새로운 옵션의 값 설정
+        newOption.textContent = `${depTer.depTerName}`; // 새로운 옵션의 텍스트 설정
+
+        // 새로운 옵션을 select 요소에 추가
+        select1.appendChild(newOption);
+      });
+      select1.value = scode;
+      title_left.textContent =
+        select1.options[select1.selectedIndex].textContent;
+    };
+    loadDep();
+    select1.value = scode;
+    // 도착 드롭다운 데이터
+    while (select2.options.length > 1) {
+      select2.removeChild(select2.lastChild);
+    }
+    url = `${rootPath}/searchbus/loadArrTer?depTerId=` + scode;
+    const loadArr = async () => {
+      const response = await fetch(url);
+      const result = await response.json();
+      result.forEach((arrTer) => {
+        // 새로운 옵션을 생성
+        const newOption = document.createElement("option");
+        newOption.value = `${arrTer.tl_arrTerId}`; // 새로운 옵션의 값 설정
+        newOption.textContent = `${arrTer.arrTerName}`; // 새로운 옵션의 텍스트 설정
+
+        // 새로운 옵션을 select 요소에 추가
+        select2.appendChild(newOption);
+      });
+      select2.value = ecode;
+
+      title_right.textContent =
+        select2.options[select2.selectedIndex].textContent;
+    };
+    loadArr();
+    select2.value = ecode;
+    // 리스트 데이터
+    mainviewForm.style.display = "flex";
+
+    const title_left = document.getElementById("title_left");
+    const title_right = document.getElementById("title_right");
+
+    url = `${rootPath}/searchbus/loadSchedule?depTerId=${scode}&arrTerId=${ecode}`;
+
+    const loadSchedule = async () => {
+      const response = await fetch(url);
+      const result = await response.json();
+      // result 로 화면그리기, 출발시간 + 소요시간 = 도착시간 계산
+      const list_body = document?.getElementById("list_body");
+
+      // 내용 삭제
+      while (list_body.firstChild) {
+        list_body.removeChild(list_body.firstChild);
+      }
+
+      result.forEach((drive) => {
+        const trElement = document?.createElement("tr");
+        trElement.classList.add("list_index_body");
+
+        // 새로운 span 요소들을 생성하고 내용을 설정
+        const td1 = document.createElement("td");
+        td1.textContent = `${drive.tes_schedule}`;
+
+        const td2 = document.createElement("td");
+        td2.textContent = returnArrTime(
+          `${drive.tes_schedule}`,
+          `${drive.td_wasteTime}`
+        );
+
+        const td3 = document.createElement("td");
+        td3.textContent = `${drive.td_fare}`;
+
+        const td4 = document.createElement("td");
+        // 비교문 실행 후 이미지 삽입
+        td4.textContent = "O";
+
+        // 생성한 span 요소들을 div 요소에 추가
+        trElement.appendChild(td1);
+        trElement.appendChild(td2);
+        trElement.appendChild(td3);
+        trElement.appendChild(td4);
+
+        // 생성한 div 요소를 list_body 요소에 추가
+        list_body.appendChild(trElement);
+      });
+    };
+    loadSchedule();
+    animationPlay();
+  }
+
+  //
+  //
+  // 옵션박스 출발터미널 선택시
+  //
   const inputDepTer = async () => {
     let depValue = select1.value;
     // 컨트롤러에게 DepValue 값 보내고 select2 에 옵션추가
@@ -31,6 +149,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   };
 
+  // 옵션박스 도착터미널 선택시
   const inputDepTerAndArrTer = async () => {
     if (select1.value !== "str_default" && select2.value !== "end_default") {
       //   console.log("출발 정류장 ID : " + select1.value);

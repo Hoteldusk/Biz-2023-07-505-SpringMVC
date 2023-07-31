@@ -62,7 +62,7 @@
 
 		<section class="main">
 			<article>
-				<a href="${rootPath}/nosun"> <img
+				<a href="${rootPath}/searchbus"> <img
 					src="${rootPath}/resources/img/bus.png" width="125px"
 					height="175px" /> <span>노선 조회</span>
 				</a>

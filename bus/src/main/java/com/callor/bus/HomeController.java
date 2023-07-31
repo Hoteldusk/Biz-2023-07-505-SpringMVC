@@ -185,16 +185,30 @@ public class HomeController {
 	}
 	
 	@RequestMapping(value = "/searchbus", method = RequestMethod.GET)
-	public String searchBus(Model model, @RequestParam(required = false, defaultValue = "")String scode, @RequestParam(required = false, defaultValue = "")String ecode) {
-		List<TerLinkVO> terlist = loadDB.loadDepTerData();
+	public String searchBus(
+			Model model,
+			HttpSession httpSession,
+			@RequestParam(required = false, defaultValue = "default")String scode, 
+			@RequestParam(required = false, defaultValue = "default")String ecode) {
+			
 		UsuallyDto usDto = new UsuallyDto();
 		usDto.setUs_stcode(scode);
 		usDto.setUs_etcode(ecode);
 		model.addAttribute("USNOSUN", usDto);
+		
+		System.out.println("scode : " + scode);
+		System.out.println("ecode : " + ecode);
+		
+		List<TerLinkVO> terlist = loadDB.loadDepTerData();
 		model.addAttribute("DEPTERS", terlist);
 		return "searchbus";
 	}
 	
+	@ResponseBody
+	@RequestMapping(value = "/searchbus/loadDepTer", method = RequestMethod.GET)
+	public List<TerLinkVO> loadDepTer() {
+		return loadDB.loadDepTerData();
+	}
 	
 	@ResponseBody
 	@RequestMapping(value = "/searchbus/loadArrTer", method = RequestMethod.GET)
