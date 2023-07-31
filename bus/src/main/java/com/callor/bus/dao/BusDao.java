@@ -3,6 +3,7 @@ package com.callor.bus.dao;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Delete;
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
 
 import com.callor.bus.dto.UserDto;
@@ -29,4 +30,7 @@ public interface BusDao {
 	@Delete("delete from tbl_bus_user where bu_id = #{id}")
 	public int delete(String id); 
 
+	@Insert("insert into tbl_usually(s_terminal, e_terminal, us_stcode, us_etcode, us_buid) "
+	        + "VALUES (#{s_terminal}, #{e_terminal}, #{us_stcode}, #{us_etcode}, #{us_buid})")
+	public int usuallyinsert(UsuallyDto usuallyDto);
 }

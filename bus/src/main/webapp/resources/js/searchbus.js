@@ -6,15 +6,9 @@ document.addEventListener("DOMContentLoaded", () => {
   const stopAni_str = document.getElementById("stop-image-str");
   const stopAni_end = document.getElementById("stop-image-end");
   const moveAni = document.getElementById("moving-image");
-  //
-  //
-  // 즐겨찾기 등록 유효성검사
-  //
 
-  //
-  //
+  const bookmarkLink = document.getElementById("bookmark");
   // 최초페이지 실행(즐겨찾기에서 넘어올시)
-  //
   if (scode !== "default" && ecode !== "default") {
     const select1 = document.getElementById("select1");
     const select2 = document.getElementById("select2");
@@ -121,10 +115,7 @@ document.addEventListener("DOMContentLoaded", () => {
     animationPlay();
   }
 
-  //
-  //
   // 옵션박스 출발터미널 선택시
-  //
   const inputDepTer = async () => {
     let depValue = select1.value;
     // 컨트롤러에게 DepValue 값 보내고 select2 에 옵션추가
@@ -243,6 +234,25 @@ document.addEventListener("DOMContentLoaded", () => {
     moveAni.style.animationPlayState = "paused";
   }
 
+  //즐겨찾기 등록
+  const bookmark = async () => {
+    const depTerId = select1.value;
+    const arrTerId = select2.value;
+    const depTerName = select1.options[select1.selectedIndex].textContent;
+    const arrTerName = select2.options[select2.selectedIndex].textContent;
+
+    if (depTerId !== "str_default" && arrTerId !== "end_default") {
+      const url = `${rootPath}/bookmark?depTerId=${depTerId}&arrTerId=${arrTerId}&depTerName=${depTerName}&arrTerName=${arrTerName}`;
+      const response = await fetch(url);
+      const result = await response.json();
+      const message = result.message;
+      alert(message);
+    } else {
+      alert("출발지와 도착지를 선택해주세요");
+      return false;
+    }
+  };
+
   // 유효성 검사 및 애니매이션 재생
   function handleChange() {
     if (select1.value === "str_default") {
@@ -279,4 +289,7 @@ document.addEventListener("DOMContentLoaded", () => {
   select1.addEventListener("change", inputDepTer);
   select2.addEventListener("change", handleChange);
   select2.addEventListener("change", inputDepTerAndArrTer);
+  if (bookmarkLink) {
+    bookmarkLink.addEventListener("click", bookmark);
+  }
 });

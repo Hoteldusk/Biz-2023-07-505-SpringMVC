@@ -43,7 +43,7 @@ prefix="c"%>
           </form>
 
           <c:if test="${not empty sessionScope.USER}">
-            <div>즐겨 찾기 등록</div>
+            <div id="bookmark">즐겨 찾기 등록</div>
           </c:if>
           <c:if test="${empty sessionScope.USER}">
             <div>노선 조회</div>

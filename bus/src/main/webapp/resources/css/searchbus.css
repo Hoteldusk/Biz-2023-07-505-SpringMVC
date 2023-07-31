@@ -264,6 +264,10 @@ div.toptail {
   border-top: 2px solid rgb(108, 190, 241);
 }
 
+#bookmark {
+  cursor: pointer;
+}
+
 /* .list_index {
   height: 18%;
   font-size: 30px;
