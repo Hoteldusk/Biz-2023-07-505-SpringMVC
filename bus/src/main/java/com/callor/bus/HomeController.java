@@ -8,6 +8,7 @@ import org.json.JSONException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -44,7 +45,9 @@ public class HomeController {
 		if (userDto == null) {
 			model.addAttribute("LOGINOUT", "LOGIN");
 		} else {
+			userDto = busService.findById(userDto.getBu_id());
 			model.addAttribute("LOGINOUT", "LOGOUT");
+			model.addAttribute("LOGINUSER", userDto);
 		}
 		return "home";
 
@@ -65,7 +68,7 @@ public class HomeController {
 	}
 
 	@RequestMapping(value = "/join", method = RequestMethod.POST, produces = "text/html;charset=UTF-8")
-	public String join(UserDto userDto, Model model) {
+	public String join(@ModelAttribute("NEWUSER") UserDto userDto, Model model) {
 		UserDto dto = busService.findById(userDto.getBu_id());
 
 		if (dto == null) {
@@ -114,21 +117,13 @@ public class HomeController {
 		return "searcharea";
 	}
 
-	@RequestMapping(value = "/searchbus", method = RequestMethod.GET)
-	public String searchBus(Model model) {
-		List<TerLinkVO> terlist = loadDB.loadDepTerData();
-		model.addAttribute("DEPTERS", terlist);
-		return "searchbus";
-	}
-	
 	@RequestMapping(value = "/mypage", method = RequestMethod.GET)
-	public String mypage(HttpSession httpSession, Model model, String MSG) {
+	public String mypage(HttpSession httpSession, Model model) {
 
 		UserDto userDto = (UserDto) httpSession.getAttribute("USER");
 		if (userDto != null) {
 			UserDto selectDto = busService.findById(userDto.getBu_id());
 			model.addAttribute("MYUSER", selectDto);
-			model.addAttribute("MSG", MSG);
 			return "mypage";
 		} else {
 			return "redirect:/login";
@@ -155,7 +150,7 @@ public class HomeController {
 	public String delete(@RequestParam(name = "id") String id, HttpSession httpSession) {
 		log.debug("id정보 : {}", id);
 		busService.delete(id);
-		
+
 		httpSession.setAttribute("USER", null);
 		httpSession.removeAttribute("USER");
 
@@ -188,6 +183,18 @@ public class HomeController {
 			return "redirect:/mypage?MSG=NO";
 		}
 	}
+	
+	@RequestMapping(value = "/searchbus", method = RequestMethod.GET)
+	public String searchBus(Model model, @RequestParam(required = false, defaultValue = "")String scode, @RequestParam(required = false, defaultValue = "")String ecode) {
+		List<TerLinkVO> terlist = loadDB.loadDepTerData();
+		UsuallyDto usDto = new UsuallyDto();
+		usDto.setUs_stcode(scode);
+		usDto.setUs_etcode(ecode);
+		model.addAttribute("USNOSUN", usDto);
+		model.addAttribute("DEPTERS", terlist);
+		return "searchbus";
+	}
+	
 	
 	@ResponseBody
 	@RequestMapping(value = "/searchbus/loadArrTer", method = RequestMethod.GET)

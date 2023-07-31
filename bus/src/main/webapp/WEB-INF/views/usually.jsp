@@ -16,6 +16,10 @@
 	rel="stylesheet" />
 <title>시외버스 - 즐겨찾기</title>
 <link href="${rootPath}/resources/css/usually.css" rel="stylesheet">
+<script type="text/javascript">
+var rootPath = "${rootPath}";
+</script>
+<script type="text/javascript" src="${rootPath}/resources/js/usually.js"></script>
 
 </head>
 <body>
@@ -26,13 +30,13 @@
 			</h1>
 			<h2>즐겨찾기</h2>
 		</header>
-		<table>
+		<table class="us table">
 			<tr>
 				<th>출발지</th>
 				<th>목적지</th>
 			</tr>
 			<c:forEach items="${USLIST}" var="US">
-				<tr>
+				<tr data-stcode = "${US.us_stcode}" data-etcode = "${US.us_etcode}">
 					<td>${US.s_terminal}</td>
 					<td>${US.e_terminal}</td>
 				</tr>

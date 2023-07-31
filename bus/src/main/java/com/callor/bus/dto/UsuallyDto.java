@@ -18,6 +18,7 @@ public class UsuallyDto {
 	private String s_terminal;
 	private String e_terminal;
 	private String us_buid;
-	private String us_tcode;
+	private String us_stcode;
+	private String us_etcode;
 
 }

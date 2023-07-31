@@ -38,46 +38,52 @@
 			</C:if>
 			<C:if test="${LOGINOUT == 'LOGOUT'}">
 				<h1>
-
 					<a href="${rootPath}/logout">${LOGINOUT}</a>
 				</h1>
 			</C:if>
 
-			<h1>
-				<a href="${rootPath}/mypage">마이페이지</a>
-			</h1>
-			<C:if test="${LOGINOUT == 'LOGIN'}">
-			<h1>
-				<a href="${rootPath}/join">회원가입</a>
-			</h1>
+			<C:if test="${not empty LOGINUSER}">
+				<h1>
+					<a href="${rootPath}/mypage">${LOGINUSER.bu_name}</a>
+				</h1>
 			</C:if>
-			<h1>
-				<a href="${rootPath}/userprint">유저조회</a>
-			</h1>
+			
+			<C:if test="${LOGINOUT == 'LOGIN'}">
+				<h1>
+					<a href="${rootPath}/join">회원가입</a>
+				</h1>
+			</C:if>
+			<C:if test="${LOGINUSER.bu_id == 'test'}">
+				<h1>
+					<a href="${rootPath}/userprint">유저조회</a>
+				</h1>
+			</C:if>
 		</div>
 
 		<section class="main">
 			<article>
-				<a href="${rootPath}/searchbus"> <img
-					src="${rootPath}/resources/img/bus.png" width="125px" height="175px" />
-					<span>노선 조회</span>
+				<a href="${rootPath}/nosun"> <img
+					src="${rootPath}/resources/img/bus.png" width="125px"
+					height="175px" /> <span>노선 조회</span>
 				</a>
 			</article>
 			<article>
-				<a href="${rootPath}/searcharea"> <img src="${rootPath}/resources/img/terminalarea.png"
-					width="125px" height="175px" /> <span>터미널 위치 조회</span>
+				<a href="${rootPath}/searcharea"> <img
+					src="${rootPath}/resources/img/terminalarea.png" width="125px"
+					height="175px" /> <span>터미널 위치 조회</span>
 				</a>
 			</article>
 			<article>
-				<a href="${rootPath}/usually"> <img src="${rootPath}/resources/img/usually.png"
-					width="125px" height="175px" /> <span>즐겨찾기</span>
+				<a href="${rootPath}/usually"> <img
+					src="${rootPath}/resources/img/usually.png" width="125px"
+					height="175px" /> <span>즐겨찾기</span>
 				</a>
 			</article>
 			<article>
 				<a
 					href="https://www.usquare.co.kr/kor/usquare/reservation.do?mode=reservationList&srCategoryId1=9"><img
-					src="${rootPath}/resources/img/busStop.png" width="125px" height="175px" /> <span>예매
-						사이트 이동</span></a>
+					src="${rootPath}/resources/img/busStop.png" width="125px"
+					height="175px" /> <span>예매 사이트 이동</span></a>
 			</article>
 		</section>
 		<div id="light"></div>
@@ -90,4 +96,3 @@
 	</div>
 </body>
 </html>
-

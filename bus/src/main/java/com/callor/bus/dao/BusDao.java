@@ -18,7 +18,7 @@ public interface BusDao {
 	@Select("select * from tbl_bus_user where bu_id = #{id}")
 	public UserDto findById(String id);
 	
-	@Select("select US.s_terminal, US.e_terminal, U.bu_name from tbl_usually US "
+	@Select("select US.s_terminal, US.e_terminal, US.us_stcode, US.us_etcode from tbl_usually US "
 			+ "left join tbl_bus_user U "
 			+ "	on US.us_buid = #{id} "
 			+ "where U.bu_id = #{id}")
