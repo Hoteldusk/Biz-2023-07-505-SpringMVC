@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
+import org.apache.ibatis.annotations.Param;
 import org.json.JSONException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -226,6 +227,42 @@ public class HomeController {
 		return "searchbus";
 	}
 
+	@RequestMapping(value = "/findIdPw", method = RequestMethod.GET)
+	public String findIdPw() {
+
+		return "login/findIdPw";
+	}
+
+	@RequestMapping(value = "/find_Id", method = RequestMethod.POST)
+	public String findIdPw(@Param("bu_name") String bu_name, @Param("bu_tel") String bu_tel, Model model) {
+		UserDto dto = busService.findId(bu_name, bu_tel);
+		model.addAttribute("F_ID", dto);
+
+		return "login/find_id";
+	}
+
+	@RequestMapping(value = "/find_Id", method = RequestMethod.GET)
+	public String findId() {
+
+		return "login/find_id";
+
+	}
+
+	@RequestMapping(value = "/find_Pw", method = RequestMethod.GET)
+	public String findPw() {
+
+		return "login/find_pw";
+	}
+
+	@RequestMapping(value = "/find_Pw", method = RequestMethod.POST)
+	public String findPw(@Param("bu_id") String bu_id, @Param("bu_tel") String bu_tel, Model model) {
+
+		UserDto dto = busService.findPw(bu_id, bu_tel);
+		model.addAttribute("F_ID", dto);
+		return "login/find_pw";
+
+	}
+
 	@ResponseBody
 	@RequestMapping(value = "/bookmark", method = RequestMethod.GET)
 	public RequestMessage bookmark(String depTerId, String arrTerId, String depTerName, String arrTerName,
@@ -268,8 +305,10 @@ public class HomeController {
 	public List<TerDriveVO> loadSchedule(String depTerId, String arrTerId) {
 		List<TerDriveVO> volist = loadDB.loadTerDriveAndSchedule(depTerId, arrTerId);
 		TerDriveVO closestVO = Utils.setClosestTime(volist);
-		if(closestVO != null) System.out.println(closestVO);
-		
+		if (closestVO != null)
+			System.out.println(closestVO);
+
 		return volist;
 	}
+
 }

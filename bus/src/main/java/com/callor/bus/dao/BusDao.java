@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
 import com.callor.bus.dto.UserDto;
@@ -33,4 +34,12 @@ public interface BusDao {
 	@Insert("insert into tbl_usually(s_terminal, e_terminal, us_stcode, us_etcode, us_buid) "
 	        + "VALUES (#{s_terminal}, #{e_terminal}, #{us_stcode}, #{us_etcode}, #{us_buid})")
 	public int usuallyinsert(UsuallyDto usuallyDto);
+	
+	@Select("SELECT * FROM tbl_bus_user "
+			+ " WHERE bu_name = #{bu_name} AND bu_tel = #{bu_tel}")
+	public UserDto findId(@Param("bu_name") String bu_name, @Param("bu_tel") String bu_tel);
+
+	@Select("SELECT * FROM tbl_bus_user"
+			+ " WHERE bu_id = #{bu_id} AND bu_tel = #{bu_tel}")
+	public UserDto findPw(@Param("bu_id") String bu_id, @Param("bu_tel") String bu_tel); 
 }

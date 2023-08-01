@@ -104,6 +104,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
         if (isclose === "true") {
           td4.textContent = "◀";
+          td4.setAttribute("id", "movingArrow");
+          trElement.setAttribute("id", "closeTR");
         } else if (isclose === "false") {
           td4.textContent = " ";
         }
@@ -207,11 +209,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
         if (isclose === "true") {
           td4.textContent = "◀";
+          trElement.setAttribute("id", "closeTR");
+          td4.setAttribute("id", "movingArrow");
         } else if (isclose === "false") {
           td4.textContent = " ";
         }
-
-        // div 테두리 표시해주고 마무리
 
         // 생성한 span 요소들을 div 요소에 추가
         trElement.appendChild(td1);

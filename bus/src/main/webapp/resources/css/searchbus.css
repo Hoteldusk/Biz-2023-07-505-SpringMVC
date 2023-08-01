@@ -190,6 +190,20 @@ div.toptail {
   }
 }
 
+@keyframes changeArrow {
+  0% {
+    transform: translateX(5%);
+  }
+
+  50% {
+    transform: translateX(0%);
+  }
+
+  100% {
+    transform: translateX(5%);
+  }
+}
+
 .middleview {
   display: flex;
   flex-direction: column;
@@ -202,6 +216,7 @@ div.toptail {
 
   display: none;
   overflow-y: auto;
+  overflow-x: hidden;
 }
 .middleview::-webkit-scrollbar {
   width: 10px;
@@ -268,6 +283,13 @@ div.toptail {
   cursor: pointer;
 }
 
+#closeTR {
+  border: 3px solid rgb(118, 254, 0);
+}
+
+#movingArrow {
+  animation: changeArrow 1s ease-in-out infinite;
+}
 /* .list_index {
   height: 18%;
   font-size: 30px;

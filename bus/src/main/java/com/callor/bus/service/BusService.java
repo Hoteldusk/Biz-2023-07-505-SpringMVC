@@ -19,4 +19,7 @@ public interface BusService {
 	public List<UsuallyDto> usuallyList(String id);
 	public int update(UserDto userDto);
 	public int delete(String id);
+	
+	public UserDto findId(String bu_name, String bu_tel);
+	public UserDto findPw(String bu_id, String bu_tel);
 }

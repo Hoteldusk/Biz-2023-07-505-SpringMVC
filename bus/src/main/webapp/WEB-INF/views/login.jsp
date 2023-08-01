@@ -32,6 +32,9 @@
 				type="password" placeholder="비밀번호" name="bu_password" class="pwd1" />
 			<input type="submit" value="로그인" class="submitBtn" />
 		</form>
+		<div class="login_etc">
+			<a href="join.html">회원가입</a> | <a href="findIdPw.html">아이디/비번찾기</a>
+		</div>
 	</div>
 </body>
 </html>

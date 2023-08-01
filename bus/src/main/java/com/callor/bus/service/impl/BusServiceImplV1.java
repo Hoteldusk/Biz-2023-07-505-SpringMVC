@@ -75,4 +75,16 @@ public class BusServiceImplV1 implements BusService {
 		return busDao.delete(id);
 	}
 
+	@Override
+	public UserDto findId(String bu_name, String bu_tel) {
+		// TODO Auto-generated method stub
+		return busDao.findId(bu_name, bu_tel);
+	}
+
+	@Override
+	public UserDto findPw(String bu_id, String bu_tel) {
+		// TODO Auto-generated method stub
+		return busDao.findPw(bu_id, bu_tel);
+	}
+
 }
