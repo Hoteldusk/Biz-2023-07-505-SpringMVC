@@ -18,5 +18,6 @@ public class TerDriveVO {
 	private String td_interval;//,varchar(6)
 	private String td_wasteTime;//,varchar(6)
 	private int td_fare;//,int
-	private String tes_schedule;//,varchar(6)    	
+	private String tes_schedule;//,varchar(6)
+	private boolean isCloset = false;
 }

@@ -72,6 +72,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const loadSchedule = async () => {
       const response = await fetch(url);
       const result = await response.json();
+      console.log(result);
       // result 로 화면그리기, 출발시간 + 소요시간 = 도착시간 계산
       const list_body = document?.getElementById("list_body");
 
@@ -99,7 +100,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
         const td4 = document.createElement("td");
         // 비교문 실행 후 이미지 삽입
-        td4.textContent = "O";
+        const isclose = `${drive.closet}`;
+
+        if (isclose === "true") {
+          td4.textContent = "◀";
+        } else if (isclose === "false") {
+          td4.textContent = " ";
+        }
 
         // 생성한 span 요소들을 div 요소에 추가
         trElement.appendChild(td1);
@@ -196,7 +203,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
         const td4 = document.createElement("td");
         // 비교문 실행 후 이미지 삽입
-        td4.textContent = "O";
+        const isclose = `${drive.closet}`;
+
+        if (isclose === "true") {
+          td4.textContent = "◀";
+        } else if (isclose === "false") {
+          td4.textContent = " ";
+        }
+
+        // div 테두리 표시해주고 마무리
 
         // 생성한 span 요소들을 div 요소에 추가
         trElement.appendChild(td1);

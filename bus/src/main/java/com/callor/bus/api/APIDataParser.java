@@ -12,7 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.callor.bus.dto.TerDriveDto;
 import com.callor.bus.dto.TerDto;
 import com.callor.bus.dto.TerLinkDto;
-import com.callor.bus.utils.DeduplicationUtils;
+import com.callor.bus.utils.Utils;
 
 
 
@@ -107,7 +107,7 @@ public class APIDataParser {
                 }// for end
             }
         }
-        List<TerDto> deDupTerList = DeduplicationUtils.removeDuplicates(terList);
+        List<TerDto> deDupTerList = Utils.removeDuplicates(terList);
         return deDupTerList;
     }
 

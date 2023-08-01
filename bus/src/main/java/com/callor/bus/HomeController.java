@@ -23,6 +23,7 @@ import com.callor.bus.dto.UsuallyDto;
 import com.callor.bus.service.BusService;
 import com.callor.bus.service.LoadDB;
 import com.callor.bus.service.SaveDB;
+import com.callor.bus.utils.Utils;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -265,6 +266,10 @@ public class HomeController {
 	@ResponseBody
 	@RequestMapping(value = "/searchbus/loadSchedule", method = RequestMethod.GET)
 	public List<TerDriveVO> loadSchedule(String depTerId, String arrTerId) {
-		return loadDB.loadTerDriveAndSchedule(depTerId, arrTerId);
+		List<TerDriveVO> volist = loadDB.loadTerDriveAndSchedule(depTerId, arrTerId);
+		TerDriveVO closestVO = Utils.setClosestTime(volist);
+		if(closestVO != null) System.out.println(closestVO);
+		
+		return volist;
 	}
 }

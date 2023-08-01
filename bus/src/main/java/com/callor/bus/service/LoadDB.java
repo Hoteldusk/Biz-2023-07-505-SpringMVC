@@ -11,7 +11,7 @@ import com.callor.bus.dao.TerLinkVODao;
 import com.callor.bus.dto.TerDriveVO;
 import com.callor.bus.dto.TerLinkDto;
 import com.callor.bus.dto.TerLinkVO;
-import com.callor.bus.utils.DeduplicationUtils;
+import com.callor.bus.utils.Utils;
 
 @Service
 public class LoadDB {
@@ -30,7 +30,7 @@ public class LoadDB {
 	public List<TerLinkVO> loadDepTerData() {
         List<TerLinkVO> terLinkVOs = terLinkVODao.selectAll();
         
-        return DeduplicationUtils.removeDuplicates(terLinkVOs);
+        return Utils.removeDuplicates(terLinkVOs);
     }
 
     // 출발지 선택시 도착지 리스트 데이터 전송

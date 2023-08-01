@@ -19,7 +19,7 @@ import com.callor.bus.dto.TerDriveDto;
 import com.callor.bus.dto.TerDto;
 import com.callor.bus.dto.TerLinkDto;
 import com.callor.bus.dto.TerScheduleDto;
-import com.callor.bus.utils.DeduplicationUtils;
+import com.callor.bus.utils.Utils;
 
 @Service
 public class SaveDB {
@@ -124,7 +124,7 @@ public class SaveDB {
 				} // for end
 			}
 		}
-		List<TerDto> dedupTerList = DeduplicationUtils.removeDuplicates(terList);
+		List<TerDto> dedupTerList = Utils.removeDuplicates(terList);
 
 		for (TerDto dto : dedupTerList) {
 			terDao.insert(dto);
