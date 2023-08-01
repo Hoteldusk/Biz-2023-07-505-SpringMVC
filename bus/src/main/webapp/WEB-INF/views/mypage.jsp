@@ -8,6 +8,10 @@
 <meta charset="UTF-8">
 <title>마이페이지</title>
 <link href="${rootPath}/resources/css/mypage.css" rel="stylesheet" />
+<script>
+	var rootPath = "${rootPath}";
+</script>
+<script src="${rootPath}/resources/js/mypage.js"></script>
 </head>
 <body>
 	<header>
@@ -16,7 +20,7 @@
 		</h1>
 	</header>
 
-	<div class="mypage">
+	<div id = "mypage" class="mypage">
 		<div>
 			<strong>아이디</strong>
 			<div>${MYUSER.bu_id}</div>
@@ -40,10 +44,9 @@
 
 		<div>
 			<c:if test="${MYUSER.bu_id == 'test'}">
-				<button type="button" class="db-btn">DB갱신</button>
+				<button type="button" id="db_btn" class="db_btn">DB갱신</button>
 			</c:if>
 		</div>
-
 	</div>
 </body>
 </html>

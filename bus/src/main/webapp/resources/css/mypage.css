@@ -76,3 +76,7 @@ a:active {
 div.mypage div div {
   border: 1px solid black;
 }
+
+div.message_box {
+  font-size: 25px;
+}

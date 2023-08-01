@@ -172,78 +172,99 @@ public class HomeController {
 			return "redirect:/login";
 		}
 	}
+
+	@ResponseBody
 	@RequestMapping(value = "/mypage/savedb", method = RequestMethod.GET)
-	public String saveDB(Model model) {
+	public RequestMessage saveDB(Model model, HttpSession httpSession) {
 
-		try {
-			saveDB.saveTerDB();
-			saveDB.saveTerLinkDB();
-			saveDB.saveTerDriveDB();
-			saveDB.saveTerScheduleDB();
+		RequestMessage message = new RequestMessage();
 
-			return "redirect:/mypage?MSG=OK";
-		} catch (JSONException e) {
+		UserDto userDto = (UserDto) httpSession.getAttribute("USER");
+		if (userDto != null) {
+			String id = userDto.getBu_id();
+			if (id.equals("test")) {
+				try {
+					saveDB.saveTerDB();
+					saveDB.saveTerLinkDB();
+					saveDB.saveTerDriveDB();
+					saveDB.saveTerScheduleDB();
 
-			return "redirect:/mypage?MSG=NO";
+					message.setMessage("DB저장에 성공했습니다");
+
+					return message;
+				} catch (JSONException e) {
+
+					message.setMessage("DB저장에 실패했습니다");
+
+					return message;
+				}
+
+			} else {
+				message.setMessage("권한이 없습니다");
+
+				return message;
+			}
+		} else {
+			message.setMessage("권한이 없습니다");
+
+			return message;
 		}
 	}
-	
+
 	@RequestMapping(value = "/searchbus", method = RequestMethod.GET)
-	public String searchBus(
-			Model model,
-			@RequestParam(required = false, defaultValue = "default")String scode, 
-			@RequestParam(required = false, defaultValue = "default")String ecode) {
-			
+	public String searchBus(Model model, @RequestParam(required = false, defaultValue = "default") String scode,
+			@RequestParam(required = false, defaultValue = "default") String ecode) {
+
 		UsuallyDto usDto = new UsuallyDto();
 		usDto.setUs_stcode(scode);
 		usDto.setUs_etcode(ecode);
 		model.addAttribute("USNOSUN", usDto);
-		
+
 		List<TerLinkVO> terlist = loadDB.loadDepTerData();
 		model.addAttribute("DEPTERS", terlist);
 		return "searchbus";
 	}
-	
+
 	@ResponseBody
 	@RequestMapping(value = "/bookmark", method = RequestMethod.GET)
-	public RequestMessage bookmark(String depTerId, String arrTerId, String depTerName, String arrTerName, HttpSession httpSession) {
+	public RequestMessage bookmark(String depTerId, String arrTerId, String depTerName, String arrTerName,
+			HttpSession httpSession) {
 		UsuallyDto usuallyDto = new UsuallyDto();
 		UserDto userDto = (UserDto) httpSession.getAttribute("USER");
-		
+
 		usuallyDto.setUs_buid(userDto.getBu_id());
 		usuallyDto.setUs_stcode(depTerId);
 		usuallyDto.setUs_etcode(arrTerId);
 		usuallyDto.setS_terminal(depTerName.trim());
 		usuallyDto.setE_terminal(arrTerName);
-		
-		
+
 		int result = busDao.usuallyinsert(usuallyDto);
 		RequestMessage message = new RequestMessage();
-		
-		if(result != 0) {
+
+		if (result != 0) {
 			message.setMessage("즐겨찾기 추가에 성공했습니다");
 		} else {
 			message.setMessage("즐겨찾기에 실패했습니다");
 		}
-		
+
 		return message;
 	}
-	
+
 	@ResponseBody
 	@RequestMapping(value = "/searchbus/loadDepTer", method = RequestMethod.GET)
 	public List<TerLinkVO> loadDepTer() {
 		return loadDB.loadDepTerData();
 	}
-	
+
 	@ResponseBody
 	@RequestMapping(value = "/searchbus/loadArrTer", method = RequestMethod.GET)
 	public List<TerLinkVO> loadArrTer(String depTerId) {
 		return loadDB.loadArrTerData(depTerId);
 	}
-	
+
 	@ResponseBody
 	@RequestMapping(value = "/searchbus/loadSchedule", method = RequestMethod.GET)
 	public List<TerDriveVO> loadSchedule(String depTerId, String arrTerId) {
 		return loadDB.loadTerDriveAndSchedule(depTerId, arrTerId);
-	}	
+	}
 }
