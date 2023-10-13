@@ -10,14 +10,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.callor.bbs.models.UserDto;
 import com.callor.bbs.repository.UserRepository;
-
-
 @Controller
 public class HomeController {
 	
 	private final UserRepository userDao;
-	
 	public HomeController(UserRepository userDao) {
+		// TODO Auto-generated constructor stub
 		this.userDao = userDao;
 	}
 	

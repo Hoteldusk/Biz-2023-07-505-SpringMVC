@@ -19,7 +19,8 @@
     </appender>
 
     <logger name="org.springframework" level="INFO" />
-    <logger name="com.callor.bbs" level="DEBUG"  additivity="false">
+    
+    <logger name="com.callor.hello" level="DEBUG"  additivity="false">
         <appender-ref ref="STDOUT"/>
     </logger>
 
@@ -28,4 +29,3 @@
     </root>
 
 </configuration>
-

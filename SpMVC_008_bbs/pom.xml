@@ -4,16 +4,24 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.callor</groupId>
-	<artifactId>bbs</artifactId>
-	<name>SpMVC_009_bbs</name>
+	<artifactId>hello</artifactId>
+	<name>SpMVC_007-Hello</name>
 	<packaging>war</packaging>
 	<version>1.0.0-BUILD-SNAPSHOT</version>
 	<properties>
 		<java-version>11</java-version>
+		<org.springframework-version>5.2.25.RELEASE</org.springframework-version>
+		<org.springsecurity-version>5.3.13.RELEASE</org.springsecurity-version>
 		<org.aspectj-version>1.6.10</org.aspectj-version>
+		<org.slf4j-version>1.7.36</org.slf4j-version>
+		<org.jasypt-version>1.9.3</org.jasypt-version>
 	</properties>
+
+	<!-- 다수의 dependecies 를 설치할 경우 version 등의 문제가 발생할 수 있는데 그러한 depdencies 를 
+		관리해 주는 도구 설치 영역 -->
 	<dependencyManagement>
 		<dependencies>
+
 			<!-- https://mvnrepository.com/artifact/org.springframework/spring-framework-bom -->
 			<dependency>
 				<groupId>org.springframework</groupId>
@@ -32,6 +40,7 @@
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
+
 	<dependencies>
 		<!-- Spring -->
 		<dependency>
@@ -48,6 +57,19 @@
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-webmvc</artifactId>
+		</dependency>
+
+
+		<!-- https://mvnrepository.com/artifact/org.springframework.security/spring-security-config -->
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-config</artifactId>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/org.springframework.security/spring-security-taglibs -->
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-taglibs</artifactId>
 		</dependency>
 
 		<!-- https://mvnrepository.com/artifact/org.springframework.security/spring-security-core -->
@@ -74,8 +96,9 @@
 			<artifactId>spring-security-taglibs</artifactId>
 		</dependency>
 
-
-		<!-- db 설정을 위한 dependencies 설정하기 -->
+		<!-- DB 연결위한 dependecies 설정 -->
+		<!-- spring jdbc -->
+		<!-- https://mvnrepository.com/artifact/org.springframework/spring-jdbc -->
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-jdbc</artifactId>
@@ -113,25 +136,20 @@
 			<version>8.1.0</version>
 		</dependency>
 
-		<!-- https://mvnrepository.com/artifact/org.springframework.data/spring-data-jpa -->
+		<!-- https://mvnrepository.com/artifact/org.jasypt/jasypt -->
 		<dependency>
-			<groupId>org.springframework.data</groupId>
-			<artifactId>spring-data-jpa</artifactId>
-			<version>2.3.9.RELEASE</version>
+			<groupId>org.jasypt</groupId>
+			<artifactId>jasypt</artifactId>
+			<version>${org.jasypt-version}</version>
 		</dependency>
 
-		<!-- https://mvnrepository.com/artifact/org.springframework/spring-orm -->
+		<!-- https://mvnrepository.com/artifact/org.jasypt/jasypt-spring31 -->
 		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-orm</artifactId>
+			<groupId>org.jasypt</groupId>
+			<artifactId>jasypt-spring31</artifactId>
+			<version>${org.jasypt-version}</version>
 		</dependency>
 
-		<!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-core -->
-		<dependency>
-			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate-core</artifactId>
-			<version>5.6.15.Final</version>
-		</dependency>
 
 		<!-- AspectJ -->
 		<dependency>
@@ -141,20 +159,11 @@
 		</dependency>
 
 		<!-- Logging -->
-
-		<!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-api -->
-		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-api</artifactId>
-			<version>2.0.7</version>
-		</dependency>
-
-
 		<!-- https://mvnrepository.com/artifact/ch.qos.logback/logback-classic -->
 		<dependency>
 			<groupId>ch.qos.logback</groupId>
 			<artifactId>logback-classic</artifactId>
-			<version>1.4.11</version>
+			<version>1.2.12</version>
 		</dependency>
 
 		<!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
@@ -166,7 +175,9 @@
 		</dependency>
 
 
+
 		<!-- Servlet -->
+
 		<!-- https://mvnrepository.com/artifact/javax.servlet/javax.servlet-api -->
 		<dependency>
 			<groupId>javax.servlet</groupId>
@@ -175,12 +186,7 @@
 			<scope>provided</scope>
 		</dependency>
 
-		<dependency>
-			<groupId>javax.servlet.jsp</groupId>
-			<artifactId>jsp-api</artifactId>
-			<version>2.1</version>
-			<scope>provided</scope>
-		</dependency>
+
 		<!-- https://mvnrepository.com/artifact/javax.servlet.jsp/javax.servlet.jsp-api -->
 		<dependency>
 			<groupId>javax.servlet.jsp</groupId>
@@ -188,6 +194,7 @@
 			<version>2.3.3</version>
 			<scope>provided</scope>
 		</dependency>
+
 
 		<dependency>
 			<groupId>javax.servlet</groupId>

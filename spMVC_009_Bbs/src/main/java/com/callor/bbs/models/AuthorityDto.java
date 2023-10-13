@@ -7,6 +7,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.springframework.data.mapping.AccessOptions.GetOptions.GetNulls;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -22,7 +24,7 @@ import lombok.ToString;
 @Builder
 
 @Entity
-@Table(name="tbl_auths", schema = "jpaDB")
+@Table(name="tbl_auths",schema = "jpaDB")
 public class AuthorityDto {
 	
 	@Id
@@ -31,6 +33,6 @@ public class AuthorityDto {
 	
 	@Column(name="username", columnDefinition = "VARCHAR(20)")
 	private String username;
-	
 	private String authority;
+	
 }

@@ -22,22 +22,23 @@ import lombok.ToString;
 @Builder
 
 @Entity
-@Table(name = "tbl_users", schema = "jpaDB")
-
+@Table(name="tbl_users",schema = "jpaDB")
 public class UserDto {
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long id;		 // bigint
+	private long id; 		// 	bigint
 	
 	@Column(name="username", columnDefinition = "VARCHAR(20)")
 	private String username; //	varchar(255)
 	
 	@Column(name="password", columnDefinition = "VARCHAR(125)")
-	private String password; //	varchar(255)
+	private String password;//	varchar(255)
 	
-	private String email;    //	varchar(255)
-	private String nickname; //	varchar(255)
+	@Column(name="email", columnDefinition = "VARCHAR(125)")
+	private String email;	//	varchar(255)
+	private String nickname;//	varchar(255)
 	
 	@Column(nullable = true)
-	private int age;         //	int	
+	private int age;		//	int
 }
